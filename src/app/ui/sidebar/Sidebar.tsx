@@ -3,7 +3,7 @@ import NavigationLink from './NavigationLink';
 
 export default function Sidebar() {
   return (
-    <div className='w-full md:w-1/3 h-screen bg-background border-r border-lime-200/80 py-6 sticky top-0'>
+    <div className='w-full md:w-1/4 h-screen bg-background border-r border-lime-200/80 py-6 sticky top-0'>
       <div className='flex flex-col h-full'>
         <div className='mb-8'>
           <Link className='text-2xl font-bold' href='/store'>

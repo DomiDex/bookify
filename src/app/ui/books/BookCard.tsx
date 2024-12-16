@@ -20,7 +20,7 @@ type Book = {
 
 export default function BookCard({ book }: { book: Book }) {
   return (
-    <div className='w-72 bg-background border border-lime-200/80 rounded-lg overflow-hidden shadow-lg m-4 flex flex-col'>
+    <div className='w-full bg-background border border-lime-200/80 rounded-lg overflow-hidden shadow-lg m-4 flex flex-col'>
       <div className='relative h-96 w-full overflow-hidden group'>
         <Image
           src={book.cover}
