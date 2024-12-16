@@ -3,27 +3,27 @@ import NavigationLink from './NavigationLink';
 
 export default function Sidebar() {
   return (
-    <nav className='w-full md:w-1/3 h-screen bg-background border-r border-lime-200/80 border-foreground/10 flex flex-col justify-center'>
-      <div className='flex flex-col justify-center '>
+    <div className='w-full md:w-1/3 h-screen bg-background border-r border-foreground/10 py-6 sticky top-0'>
+      <div className='flex flex-col h-full'>
         <div className='mb-8'>
-          <Link className='text-2xl font-bold pl-4 text-lime-400' href='/store'>
-            BOOKIFY
+          <Link className='text-2xl font-bold' href='/store'>
+            Logo
           </Link>
         </div>
 
-        <nav className='flex-1'>
+        <div className='flex-1'>
           <NavigationLink />
-        </nav>
+        </div>
 
-        <div className='mt-auto flex justify-center'>
+        <div>
           <button
             type='button'
-            className='w-11/12  bg-lime-500 text-black px-4 py-2 mt-4 rounded-md hover:bg-lime-400 transition-all duration-300'
+            className='w-full bg-lime-500 text-black px-4 py-2 rounded-md hover:bg-lime-400 transition-all duration-300'
           >
             Sign Out
           </button>
         </div>
       </div>
-    </nav>
+    </div>
   );
 }
