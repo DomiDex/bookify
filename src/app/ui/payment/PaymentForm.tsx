@@ -1,10 +1,34 @@
 'use client';
 
 import { useCart } from '../../store/context/CartContext';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function PaymentForm() {
-  const { items, total } = useCart();
+  const { items, total, clearCart } = useCart();
+  const router = useRouter();
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+
+    // Simulate payment processing
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+
+    // Generate a random order number (in real app, this would come from backend)
+    const orderNumber = Math.random()
+      .toString(36)
+      .substring(2, 15)
+      .toUpperCase();
+
+    // Clear the cart
+    clearCart();
+
+    // Redirect to order confirmation
+    router.push(`/store/track-order?order=${orderNumber}`);
+  };
 
   return (
     <div className='max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8'>
@@ -46,7 +70,7 @@ export default function PaymentForm() {
       {/* Payment Form */}
       <div className='bg-background border border-lime-200/80 rounded-lg p-6'>
         <h2 className='text-xl font-semibold mb-6'>Payment Details</h2>
-        <form className='space-y-4'>
+        <form onSubmit={handleSubmit} className='space-y-4'>
           <div className='space-y-2'>
             <label className='block text-sm font-medium'>
               Card Holder Name
@@ -88,6 +112,7 @@ export default function PaymentForm() {
 
           <button
             type='submit'
+            disabled={isProcessing}
             className='w-full bg-lime-500 text-black py-3 rounded-md hover:bg-lime-400 transition-all duration-300 mt-6'
           >
             Pay ${total.toFixed(2)}
