@@ -45,14 +45,6 @@ export default function NavigationLink() {
 
       <Link
         className='px-4 text-md font-medium py-2 border-t-[1px] border-lime-200/80 w-full bg-transparent hover:bg-lime-100/20 transition-all duration-300 flex items-center gap-2'
-        href='/store/track-order'
-      >
-        <Truck size={18} />
-        Track Order
-      </Link>
-
-      <Link
-        className='px-4 text-md font-medium py-2 border-t-[1px] border-lime-200/80 w-full bg-transparent hover:bg-lime-100/20 transition-all duration-300 flex items-center gap-2'
         href='/store/communities'
       >
         <Users size={18} />
