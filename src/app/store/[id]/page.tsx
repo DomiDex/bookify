@@ -1,8 +1,18 @@
+'use client';
+
 import Image from 'next/image';
 import { getBookById } from '../../lib/fake-data';
+import { useCart } from '../context/CartContext';
+import { use } from 'react';
 
-export default function BookDetails({ params }: { params: { id: string } }) {
-  const book = getBookById(params.id);
+export default function BookDetails({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const resolvedParams = use(params);
+  const book = getBookById(resolvedParams.id);
+  const { addToCart } = useCart();
 
   if (!book) {
     return (
@@ -11,6 +21,28 @@ export default function BookDetails({ params }: { params: { id: string } }) {
       </div>
     );
   }
+
+  const handleBuy = () => {
+    addToCart({
+      id: book.id,
+      title: book.title,
+      cover: book.cover,
+      author: book.author,
+      price: book.sellPrice,
+      type: 'buy',
+    });
+  };
+
+  const handleRent = () => {
+    addToCart({
+      id: book.id,
+      title: book.title,
+      cover: book.cover,
+      author: book.author,
+      price: book.rentPrice,
+      type: 'rent',
+    });
+  };
 
   return (
     <div className='max-w-7xl mx-auto p-6'>
@@ -77,12 +109,14 @@ export default function BookDetails({ params }: { params: { id: string } }) {
                 <button
                   className='flex-1 bg-lime-500 text-black px-6 py-3 rounded-md hover:bg-lime-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
                   disabled={book.stock === 0}
+                  onClick={handleBuy}
                 >
                   Buy Now
                 </button>
                 <button
                   className='flex-1 border border-lime-500 text-lime-500 px-6 py-3 rounded-md hover:bg-lime-500/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
                   disabled={book.isRented || book.stock === 0}
+                  onClick={handleRent}
                 >
                   Rent Book
                 </button>

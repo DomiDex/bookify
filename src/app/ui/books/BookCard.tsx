@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCart } from '../../store/context/CartContext';
 
 type Book = {
   id: string;
@@ -19,6 +22,32 @@ type Book = {
 };
 
 export default function BookCard({ book }: { book: Book }) {
+  const { addToCart } = useCart();
+
+  const handleBuy = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addToCart({
+      id: book.id,
+      title: book.title,
+      cover: book.cover,
+      author: book.author,
+      price: book.sellPrice,
+      type: 'buy',
+    });
+  };
+
+  const handleRent = (e: React.MouseEvent) => {
+    e.preventDefault();
+    addToCart({
+      id: book.id,
+      title: book.title,
+      cover: book.cover,
+      author: book.author,
+      price: book.rentPrice,
+      type: 'rent',
+    });
+  };
+
   return (
     <div className='group w-full bg-background border border-lime-200/80 rounded-lg overflow-hidden shadow-lg m-4 flex flex-col'>
       <Link href={`/store/${book.id}`} className='flex-1 flex flex-col'>
@@ -67,10 +96,18 @@ export default function BookCard({ book }: { book: Book }) {
           </span>
         </div>
         <div className='flex gap-2'>
-          <button className='flex-1 bg-lime-500 text-black px-4 py-2 rounded-md hover:bg-lime-400 transition-all duration-300'>
+          <button
+            onClick={handleBuy}
+            disabled={book.stock === 0}
+            className='flex-1 bg-lime-500 text-black px-4 py-2 rounded-md hover:bg-lime-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
+          >
             Buy
           </button>
-          <button className='flex-1 bg-lime-500 text-black px-4 py-2 rounded-md hover:bg-lime-400 transition-all duration-300'>
+          <button
+            onClick={handleRent}
+            disabled={book.isRented || book.stock === 0}
+            className='flex-1 bg-lime-500 text-black px-4 py-2 rounded-md hover:bg-lime-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
+          >
             Rent
           </button>
         </div>
