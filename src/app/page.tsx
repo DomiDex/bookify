@@ -14,7 +14,7 @@ export default function Home() {
           quos.
         </p>
         <Link
-          href='/store'
+          href='/register'
           className='bg-lime-500 text-black px-4 py-2 rounded-md hover:bg-lime-400 transition-all duration-300'
         >
           go to store
