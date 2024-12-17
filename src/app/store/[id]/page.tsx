@@ -1,17 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import { getBookById } from '../../lib/fake-data';
 import { useCart } from '../context/CartContext';
-import { use } from 'react';
+import { useParams } from 'next/navigation';
 
-export default function BookDetails({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const resolvedParams = use(params);
-  const book = getBookById(resolvedParams.id);
+export default function BookDetails() {
+  const params = useParams();
+  const book = require('../../lib/fake-data').getBookById(params.id);
   const { addToCart } = useCart();
 
   if (!book) {

@@ -12,7 +12,7 @@ export default function CartPage() {
       <div className='max-w-4xl mx-auto px-6 py-12 text-center'>
         <h1 className='text-3xl font-bold mb-4'>Your Cart is Empty</h1>
         <p className='text-foreground/60 mb-8'>
-          Looks like you haven't added any books to your cart yet.
+          Looks like you haven&apos;t added any books to your cart yet.
         </p>
         <Link
           href='/store'
@@ -69,15 +69,12 @@ export default function CartPage() {
           </div>
 
           <div className='flex gap-4'>
-            <button
-              onClick={() => {
-                // Handle checkout logic
-                alert('Proceeding to checkout...');
-              }}
-              className='flex-1 bg-lime-500 text-black px-6 py-3 rounded-md hover:bg-lime-400 transition-all duration-300'
+            <Link
+              href='/store/payment'
+              className='flex-1 text-center bg-lime-500 text-black px-6 py-3 rounded-md hover:bg-lime-400 transition-all duration-300'
             >
               Proceed to Checkout
-            </button>
+            </Link>
             <button
               onClick={clearCart}
               className='flex-1 border border-lime-500 text-lime-500 px-6 py-3 rounded-md hover:bg-lime-500/10 transition-all duration-300'

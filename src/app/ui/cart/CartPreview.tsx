@@ -86,15 +86,13 @@ export default function CartPreview() {
                 >
                   View Cart
                 </Link>
-                <button
-                  onClick={() => {
-                    setIsOpen(false);
-                    alert('Proceeding to checkout...');
-                  }}
-                  className='flex-1 border border-lime-500 text-lime-500 px-4 py-2 rounded-md hover:bg-lime-500/10 transition-all duration-300 text-sm'
+                <Link
+                  href='/store/payment'
+                  onClick={() => setIsOpen(false)}
+                  className='flex-1 text-center border border-lime-500 text-lime-500 px-4 py-2 rounded-md hover:bg-lime-500/10 transition-all duration-300 text-sm'
                 >
                   Checkout
-                </button>
+                </Link>
               </div>
             </div>
           ) : (
