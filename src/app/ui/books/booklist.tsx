@@ -2,25 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import BookCard from './BookCard';
+import { BookWithRentStatus } from '@/app/actions/books';
 
-type Book = {
-  id: string;
-  title: string;
-  description: string;
-  author: string;
-  cover: string;
-  genre: string;
-  pages: number;
-  isRented: boolean;
-  stock: number;
-  rentPrice: number;
-  sellPrice: number;
-  sold: number;
-  ISBN: string;
-  renterIds?: string[];
-};
-
-export default function BookList({ books }: { books: Book[] }) {
+export default function BookList({ books }: { books: BookWithRentStatus[] }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
